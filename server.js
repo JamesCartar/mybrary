@@ -17,12 +17,17 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
 
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on("error", (error) => console.log(error));
+db.once("open", () => console.log("connect to mongoose"));
+
 app.use("/", indexRouter);
 
 const start = async () => {
   try {
     // database connection
-    await connectDB(process.env.MONGO_URI);
+    // await connectDB(process.env.MONGO_URI);
     app.listen(process.env.PORT || 3000, () => {
       console.log("Server is listening on port http://www.localhost:3000");
     });
@@ -32,8 +37,3 @@ const start = async () => {
 };
 
 start();
-
-// mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
-// const db = mongoose.connection;
-// db.on("error", (error) => console.log(error));
-// db.once("open", () => console.log("connect to mongoose"));
