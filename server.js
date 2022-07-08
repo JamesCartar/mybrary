@@ -13,6 +13,7 @@ const bodyParser = require("body-parser");
 // routes
 const indexRouter = require("./routes/index");
 const authorRouter = require("./routes/authors");
+const bookRouter = require("./routes/books");
 
 const app = express();
 
@@ -30,6 +31,7 @@ db.once("open", () => console.log("connect to mongoose"));
 
 app.use("/", indexRouter);
 app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
 
 const start = async () => {
   try {
