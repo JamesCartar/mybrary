@@ -2,6 +2,10 @@ const express = require("express");
 const BookModel = require("../models/book");
 
 const router = express.Router();
+
+router.use(express.static("public"));
+router.use("/javascripts", express.static(__dirname + "public/javascripts"));
+
 router.get("/", async (req, res) => {
   let books;
   try {

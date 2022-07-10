@@ -27,11 +27,13 @@
 <br />
 <div>
   <% books.forEach(book => { %>
-  <img
-    alt="book image"
-    width="100px"
-    height="150px"
-    src="<%= book.coverImagePath %> "
-  />
+  <a href="/books/<%= book.id %>">
+    <img
+      alt="book image"
+      width="100px"
+      height="150px"
+      src="<%= book.coverImagePath %> "
+  /></a>
+
   <% }) %>
 </div>
