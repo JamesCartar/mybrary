@@ -7,6 +7,9 @@ const BookModel = require("../models/book");
 const AuthorModel = require("../models/author");
 const router = express.Router();
 
+router.use(express.static("public"));
+router.use("/javascripts", express.static(__dirname + "public/javascripts"));
+
 const uploadPath = path.join("public", BookModel.coverImageBasePath);
 
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
@@ -30,8 +33,6 @@ router.get("/", async (req, res) => {
   if (req.query.publishAfter != null && req.query.publishAfter != "") {
     query = query.gte("publishDate", req.query.publishAfter);
   }
-
-  console.log(query);
 
   try {
     const books = await query.exec();
